@@ -1,0 +1,1 @@
+window.__ENV = {"REACT_APP_API_URL":"http://localhost:4000","REACT_APP_PDF_GENERATOR_URL":"http://localhost:5000"};
