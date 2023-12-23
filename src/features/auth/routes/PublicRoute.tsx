@@ -1,21 +1,14 @@
-"use client";
+import { redirect } from "next/navigation";
 
-import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect } from "react";
-
-import { useAuth } from "../providers";
+import { ClientPublicRoute } from "./ClientPublicRoute";
+import { getAuth } from "../actions";
 
 export const PublicRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const router = useRouter();
-  const params = useSearchParams();
+  const auth = getAuth();
 
-  const { user, isLoaded } = useAuth();
+  if (!auth) {
+    redirect("/login");
+  }
 
-  useEffect(() => {
-    if (user && isLoaded) {
-      router.push(params.get("next") ?? "/dashboard");
-    }
-  }, [user, isLoaded, router, params]);
-
-  return <>{children}</>;
+  return <ClientPublicRoute>{children}</ClientPublicRoute>;
 };

@@ -5,3 +5,5 @@ export const PDF_GENERATOR_URL = env("PDF_GENERATOR_URL");
 
 export const ACCESS_TOKEN_KEY = "annea-access-token";
 export const REFRESH_TOKEN_KEY = "annea-refresh-token";
+
+export const SERVER_MINIMUM_REFRESH_THRESHOLD = 15 * 1000;

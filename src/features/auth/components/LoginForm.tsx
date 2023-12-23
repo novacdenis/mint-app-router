@@ -7,10 +7,10 @@ import NextLink from "next/link";
 import { Box, Button, Link, Stack, Typography } from "@mui/material";
 import { FormContainer, PasswordElement, TextFieldElement, useForm } from "react-hook-form-mui";
 
-import { useAuth } from "../providers";
+import { useClientAuth } from "../providers";
 
 export const LoginForm: React.FC = () => {
-  const { onLogin } = useAuth();
+  const { onLogin } = useClientAuth();
 
   const form = useForm<Login>({
     defaultValues: {
