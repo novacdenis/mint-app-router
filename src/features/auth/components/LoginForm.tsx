@@ -35,6 +35,7 @@ export const LoginForm: React.FC = () => {
           name="email"
           type="email"
           inputMode="email"
+          autoComplete="email"
           label="Email"
           disabled={form.formState.isSubmitting}
           validation={{
@@ -44,6 +45,7 @@ export const LoginForm: React.FC = () => {
         <PasswordElement
           fullWidth
           name="password"
+          autoComplete="current-password"
           label="Password"
           disabled={form.formState.isSubmitting}
           validation={{

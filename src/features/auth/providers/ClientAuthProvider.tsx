@@ -98,6 +98,9 @@ export const ClientAuthProvider: React.FC<ClientAuthProviderProps> = ({
         method: "GET",
         url: "/auth/refresh",
         withCredentials: true,
+        headers: {
+          Authorization: `Bearer ${refreshToken}`,
+        },
       });
 
       setAccessToken(response.data.accessToken);
@@ -106,7 +109,7 @@ export const ClientAuthProvider: React.FC<ClientAuthProviderProps> = ({
     } catch {
       onLogout();
     }
-  }, [onLogout]);
+  }, [refreshToken, onLogout]);
 
   useEffect(() => {
     if (accessToken) {

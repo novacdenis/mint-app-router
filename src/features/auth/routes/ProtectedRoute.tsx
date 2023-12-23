@@ -1,14 +1,28 @@
-import { redirect } from "next/navigation";
+"use client";
 
-import { ClientProtectedRoute } from "./ClientProtectedRoute";
-import { getAuth } from "../actions";
+import { useRouter, usePathname, useSearchParams } from "next/navigation";
+import { useEffect } from "react";
+
+import { useClientAuth } from "../providers";
 
 export const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const auth = getAuth();
+  const router = useRouter();
+  const pathname = usePathname();
+  const params = useSearchParams();
 
-  if (!auth) {
-    redirect("/login");
-  }
+  const { isAuthenticated } = useClientAuth();
 
-  return <ClientProtectedRoute>{children}</ClientProtectedRoute>;
+  useEffect(() => {
+    if (!isAuthenticated) {
+      let next = pathname;
+
+      if (params.toString()) {
+        next += `?${params.toString()}`;
+      }
+
+      router.push(`/login?next=${encodeURIComponent(next)}`);
+    }
+  }, [isAuthenticated, router, pathname, params]);
+
+  return <>{children}</>;
 };

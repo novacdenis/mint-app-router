@@ -1,10 +1,27 @@
+import { headers } from "next/headers";
 import Image from "next/image";
+import { redirect } from "next/navigation";
 
 import { Box, Stack } from "@mui/material";
 
-import { PublicRoute } from "@/features/auth";
+import { PublicRoute, getAuth } from "@/features/auth";
 
 export default function AuthLayout({ children }: { children: React.ReactNode }) {
+  const auth = getAuth();
+
+  if (auth) {
+    const search = headers().get("x-search");
+
+    if (search) {
+      const searchParams = new URLSearchParams(search);
+      const next = searchParams.get("next");
+
+      if (next) redirect(next);
+    }
+
+    redirect("/dashboard");
+  }
+
   return (
     <PublicRoute>
       <Box
