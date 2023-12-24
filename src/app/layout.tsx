@@ -4,7 +4,6 @@ import localFont from "next/font/local";
 import Script from "next/script";
 
 import { AuthProvider } from "@/features/auth";
-import { ThemeProvider } from "@/providers";
 
 const akrobat = localFont({
   variable: "--font-family",
@@ -28,9 +27,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body className={akrobat.variable}>
-        <ThemeProvider>
-          <AuthProvider>{children}</AuthProvider>
-        </ThemeProvider>
+        <AuthProvider>{children}</AuthProvider>
 
         <Script src="__ENV.js" strategy="beforeInteractive" />
       </body>

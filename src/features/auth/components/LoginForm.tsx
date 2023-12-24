@@ -2,22 +2,19 @@
 
 import type { Login } from "@/types";
 
-import NextLink from "next/link";
-
-import { Box, Button, Link, Stack, Typography } from "@mui/material";
-import { FormContainer, PasswordElement, TextFieldElement, useForm } from "react-hook-form-mui";
+import Link from "next/link";
 
 import { useClientAuth } from "../providers";
 
 export const LoginForm: React.FC = () => {
   const { onLogin } = useClientAuth();
 
-  const form = useForm<Login>({
-    defaultValues: {
-      email: "",
-      password: "",
-    },
-  });
+  // const form = useForm<Login>({
+  //   defaultValues: {
+  //     email: "",
+  //     password: "",
+  //   },
+  // });
 
   const onSubmit = async (data: Login) => {
     try {
@@ -28,8 +25,8 @@ export const LoginForm: React.FC = () => {
   };
 
   return (
-    <FormContainer formContext={form} onSuccess={onSubmit}>
-      <Stack spacing={2}>
+    <form>
+      {/* <Stack spacing={2}>
         <TextFieldElement
           fullWidth
           name="email"
@@ -80,7 +77,7 @@ export const LoginForm: React.FC = () => {
             Privacy Policy
           </Link>
         </Typography>
-      </Stack>
-    </FormContainer>
+      </Stack> */}
+    </form>
   );
 };
